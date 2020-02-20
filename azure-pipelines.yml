@@ -28,9 +28,27 @@ stages:
           $(Build.SourceBranchName)$(Build.SourceVersion)
           latest
     - task: Docker@2
-      displayName: 'Master/DEV - Push Docker Image to ACR'
+      displayName: 'Push Docker Image to DEV ACR'
       inputs:
         containerRegistry: 'scACR-F2'
+        repository: 'clamav'
+        command: 'push'
+        tags: |
+          $(Build.SourceBranchName)$(Build.SourceVersion)
+          latest
+    - task: Docker@2
+      displayName: 'Push Docker Image to Staging ACR'
+      inputs:
+        containerRegistry: 'scCybercrimeStaging'
+        repository: 'clamav'
+        command: 'push'
+        tags: |
+          $(Build.SourceBranchName)$(Build.SourceVersion)
+          latest
+    - task: Docker@2
+      displayName: 'Push Docker Image to PROD ACR'
+      inputs:
+        containerRegistry: 'scCybercrimeProd'
         repository: 'clamav'
         command: 'push'
         tags: |
