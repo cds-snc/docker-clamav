@@ -18,39 +18,33 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build and Push to DEV ACR
       inputs:
-        command: build
-        #containerRegistry: 'scACR-F2'
+        containerRegistry: 'scACR-F2'
         repository: 'clamav'
+        command: 'buildAndPush'
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(Build.SourceBranchName)$(Build.SourceVersion)
+          latest
+  
+    - task: Docker@2
+      displayName: 'Build and Push to Staging ACR'
+      inputs:
+        containerRegistry: 'scCybercrimeStaging'
+        repository: 'clamav'
+        command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(Build.SourceBranchName)$(Build.SourceVersion)
           latest
     - task: Docker@2
-      displayName: 'Push Docker Image to DEV ACR'
-      inputs:
-        containerRegistry: 'scACR-F2'
-        repository: 'clamav'
-        command: 'push'
-        tags: |
-          $(Build.SourceBranchName)$(Build.SourceVersion)
-          latest
-    - task: Docker@2
-      displayName: 'Push Docker Image to Staging ACR'
-      inputs:
-        containerRegistry: 'scCybercrimeStaging'
-        repository: 'clamav'
-        command: 'push'
-        tags: |
-          $(Build.SourceBranchName)$(Build.SourceVersion)
-          latest
-    - task: Docker@2
-      displayName: 'Push Docker Image to PROD ACR'
+      displayName: 'Build and Push to PROD ACR'
       inputs:
         containerRegistry: 'scCybercrimeProd'
         repository: 'clamav'
-        command: 'push'
+        command: 'buildAndPush'
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(Build.SourceBranchName)$(Build.SourceVersion)
           latest
