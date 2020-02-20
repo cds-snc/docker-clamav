@@ -23,7 +23,7 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
-          $(Build.SourceBranchName)$(_DASH)$(Build.SourceVersion)
+          $(Build.SourceBranchName)$(Build.SourceVersion)
           latest
     - task: Docker@2
       displayName: 'Master/DEV - Push Docker Image to ACR'
@@ -32,5 +32,5 @@ stages:
         repository: 'clamav'
         command: 'push'
         tags: |
-          $(Build.SourceBranchName)$(_DASH)$(Build.SourceVersion)
+          $(Build.SourceBranchName)$(Build.SourceVersion)
           latest
