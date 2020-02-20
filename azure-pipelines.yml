@@ -21,7 +21,7 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        containerRegistry: 'scACR-F2'
+        #containerRegistry: 'scACR-F2'
         repository: 'clamav'
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
