@@ -5,7 +5,9 @@ RUN apk add --no-cache \
     python3 py3-pip bash \
   && pip3 install --upgrade pip
 
-RUN apk add --no-cache clamav rsyslog wget clamav-libunrar
+RUN apk add --no-cache rsyslog wget
+
+RUN apk add --no-cache clamav clamav-libunrar  --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main
 
 COPY conf /etc/clamav
 COPY bootstrap.py /bootstrap.py
