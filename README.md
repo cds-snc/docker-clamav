@@ -75,5 +75,3 @@ COPY your/clamd.conf /etc/clamav/clamd.conf
 COPY your/freshclam.conf /etc/clamav/freshclam.conf
 
 ```
-
-Beep.
