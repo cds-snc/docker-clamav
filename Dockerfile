@@ -1,5 +1,5 @@
 FROM alpine:3.11.3
-LABEL maintainer="DH <dude@m-ko.de> https://m-ko.de"
+LABEL maintainer="DaveH <dude@m-ko.de> https://m-ko.de"
 
 RUN apk add --no-cache \
     python3 py3-pip bash \
